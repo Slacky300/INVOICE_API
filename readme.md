@@ -26,20 +26,20 @@ cd invoice-app
 python -m venv env
 source env/bin/activate  # On Windows, use: env\Scripts\activate
 ```
-    Install the required dependencies:
+Install the required dependencies:
 
 ```bash
 
 pip install -r requirements.txt
 ```
-    Run database migrations:
+Run database migrations:
 
 ```bash
 
 python manage.py makemigrations
 python manage.py migrate
 ```
-    Start the development server:
+Start the development server:
 
 ```bash
 
@@ -52,10 +52,10 @@ The Invoice application should now be running on http://localhost:8000/.
 The Invoice application consists of two Django models:
 Invoice Model
 
-    Fields:
-        date: The date of the invoice.
-        invoice_no: The unique identifier for the invoice.
-        customer_name: The name of the customer associated with the invoice.
+Fields:
+    date: The date of the invoice (added at the time of creation).
+    invoice_no: The unique identifier for the invoice(automatically created using uuid at the time of creation).
+    customer_name: The name of the customer associated with the invoice.
 
 InvoiceDetail Model
 
@@ -84,6 +84,23 @@ The Invoice application provides the following API endpoints:
 
     GET /invoices/: Retrieves a list of all invoices.
     POST /invoices/: Creates a new invoice along with associated invoice details in the payload.
+
+    eg. payload data:
+    { 
+      "customer_name": "John Smith",
+      "invoice_detail": [
+          {
+            "description": "Product A",
+            "unit_price": 50,
+            "quantity": 5
+          },
+          {
+            "description": "Product B",
+            "unit_price": 30,
+            "quantity": 10
+          }
+        ]
+    }
 
 ## Test Cases
 
